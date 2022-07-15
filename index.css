@@ -28,7 +28,7 @@ p {
 }
 
 .user {
-  width: 50%;
+  width: calc(100%/2);
 }
 
 .user-card {

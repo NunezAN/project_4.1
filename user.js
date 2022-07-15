@@ -1,15 +1,7 @@
 
-async function main(){
+function main(){
     const id = localStorage.getItem("id");
-    const posts = await fetch(`https://jsonplaceholder.typicode.com/posts?userId=${id}`);
-    const postsData = await posts.json();
-    console.log(postsData);
-
-    const postsWrapper = document.querySelector(".post-list");
-    console.log(postsWrapper);
-
-    const postsHTML = postsData.map(post => htmlpost(post));
-    postsWrapper.innerHTML = postsHTML.join("");
+    getData(id);
 }
 
 function htmlpost(post){
@@ -22,4 +14,19 @@ function htmlpost(post){
     </p>
   </div>`
 }
+
+function onSearchChange(event){
+    const id = event.target.value;
+    getData(id);
+}
+
+async function getData(id){
+    const posts = await fetch(`https://jsonplaceholder.typicode.com/posts?userId=${id}`);
+    const postsData = await posts.json();
+    const postsWrapper = document.querySelector(".post-list");
+
+    const postsHTML = postsData.map(post => htmlpost(post));
+    postsWrapper.innerHTML = postsHTML.join("");
+}
+
 main();
